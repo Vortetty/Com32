@@ -12,17 +12,23 @@ LINKS     = -L/usr/local/lib/libSDL2 -lSDL2 -lSDL2_mixer -lSDL2_ttf -lSDL2_image
 CPP_FILES =	$(shell find ./link -name '*.cpp') $(shell find ./link -name '*.c')
 
 
-test: clean build heady
-	chmod +x ./build/c64_term_emulator
+test: clean build
 	./build/c64_term_emulator
 
 build: clean
-	${COMPILER} ${CPP_OPTIONS} ${INCLUDES} ${LINKS} ${CPP_FILES} ./src/main.cpp -o ./build/c64_term_emulator
+	${COMPILER} ${CPP_OPTIONS} ${INCLUDES} ${LINKS} ${CPP_FILES} ./src/main.cpp -o ./build/com32
 	cp -r ./assets ./build/assets
+	chmod +x ./build/com32
 
 heady: 
 	rm -f ./build/singleFile.cpp
 	heady --source "src" --output "build/singleFile.cpp"
+
+git: clean build
+	git add *
+	git commit
+	git pull
+	git push
 
 clean:
 	-rm -rf build
