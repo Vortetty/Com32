@@ -3,6 +3,7 @@
 #include <iostream>
 #include <bitset>
 #include <string>
+#include "threadsafe/vector"
 
 #define LODEPNG_NO_COMPILE_ZLIB
 //#define LODEPNG_NO_COMPILE_DECODER
@@ -10,13 +11,13 @@
 #define LODEPNG_COMPILE_CPP
 #include <lodepng.h>
 
-std::vector<bool> loadFont(std::string filename, unsigned &width, unsigned &height){
-    std::vector<unsigned char> image; //the raw pixels
+std::threadsafe::safe_vector<bool> loadFont(std::string filename, unsigned &width, unsigned &height){
+    std::threadsafe::safe_vector<unsigned char> image; //the raw pixels
 
     //decode
     unsigned error = lodepng::decode(image, width, height, filename);
 
-    std::vector<bool> data;
+    std::threadsafe::safe_vector<bool> data;
 
     for (int y = 0; y < height; y++){
         for (int x = 0; x < width; x++){

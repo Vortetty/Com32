@@ -4,7 +4,8 @@
 #include "externs.hpp"
 #include "shared.hpp"
 #include "globals.hpp"
-#include <unistd.h>
+#include <mutex>
+
 #include <time.h>
 
 void drawChar(character chr, int x, int y, cen::renderer &renderer, int windowScale, bool invert=false){
@@ -46,7 +47,9 @@ void drawChar(character chr, Vec2 pos, cen::renderer &renderer, int windowScale,
     );
 }
 
+std::mutex mutex;
 void pushFrame(cen::window &window, cen::renderer &renderer){
+    std::lock_guard<std::mutex> lock(mutex);
     cen::texture pastRender(renderer, renderer.capture(window.get_pixel_format()));
     renderer.present();
     renderer.render(pastRender, cen::rect(0, 0, window.width(), window.height()));
@@ -66,7 +69,7 @@ void renderThreadFunc(cen::window &window, cen::renderer &renderer, cen::event &
                 windowScale
             );
             pushFrame(window, renderer);
-            //sleep(1);
+            //sleepms(1000);
 
             if (shouldKillWindow(event)){
                 killWindow(window);
@@ -100,6 +103,6 @@ void renderCursorThreadFunc(cen::window &window, cen::renderer &renderer, cen::e
         );
         pushFrame(window, renderer);
         toggle = !toggle;
-        sleep(1);
+        sleepms(500);
     }
 }

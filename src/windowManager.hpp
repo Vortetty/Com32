@@ -1,4 +1,5 @@
 #include <centurion.hpp>
+#include "threadsafe/vector"
 
 #ifndef WINDOW_MANAGER
 #define WINDOW_MANAGER
@@ -19,8 +20,8 @@ volatile bool shouldKillWindow(cen::event &event){
     return false;
 }
 
-std::vector<cen::event_type> getEvents(cen::event &event){
-    std::vector<cen::event_type> events;
+std::threadsafe::safe_vector<cen::event_type> getEvents(cen::event &event){
+    std::threadsafe::safe_vector<cen::event_type> events;
     while (event.poll()){
         std::optional<cen::event_type> e = event.type();
         if (e.has_value()) events.push_back(e.value());
