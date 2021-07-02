@@ -1,5 +1,5 @@
 COMPILER    = g++
-CPP_OPTIONS = -O3 $(shell sdl2-config --cflags --libs) -s --std=c++17 -pthread
+CPP_OPTIONS = -Ofast $(shell sdl2-config --cflags --libs) -s --std=c++17 -pthread
 
 #
 #INCLUDES  = -Iinclude -I/usr/local/include/terminalpp-2.0.2
@@ -8,7 +8,7 @@ CPP_OPTIONS = -O3 $(shell sdl2-config --cflags --libs) -s --std=c++17 -pthread
 #
 
 INCLUDES  = -Iinclude -I/usr/local/include/SDL2 -Isrc
-LINKS     = -L/usr/local/lib/libSDL2 -lSDL2 -lSDL2_mixer -lSDL2_ttf -lSDL2_image -lX11
+LINKS     = -L/usr/local/lib/libSDL2 -L/usr/local/lib -lSDL2 -lSDL2_mixer -lSDL2_ttf -lSDL2_image -lX11
 CPP_FILES =	$(shell find ./link -name '*.cpp') $(shell find ./link -name '*.c') 
 
 

@@ -2,6 +2,9 @@
  * Copyright 2021 Vortetty
  * Licenced under Apache 2.0
  */
+#define ENABLE_LOGGING
+#include "logger.hpp"
+
 #include <centurion.hpp>
 #include "windowManager.hpp"
 #include "C32colors.hpp"
