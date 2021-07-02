@@ -93,7 +93,7 @@ void renderThreadFunc(cen::window &window, cen::renderer &renderer, cen::event &
 
 void renderCursorThreadFunc(cen::window &window, cen::renderer &renderer, cen::event &event, int windowScale){
     bool toggle = false;
-    while (!windowKilled){
+    while (!shouldKillWindow()){
         drawChar(
             charBuf.at(cursorPosition.x).at(cursorPosition.y),
             cursorPosition,

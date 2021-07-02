@@ -6,10 +6,10 @@
 #include "windowManager.hpp"
 #include "C32colors.hpp"
 #include <thread>
-#include "renderer.hpp"
-#include "inputHandler.hpp"
+#include "threads/renderer.hpp"
+#include "threads/inputHandler.hpp"
 #include <iostream>
-#include "eventHandler.hpp"
+#include "threads/eventHandler.hpp"
 
 #define WINDOW_SCALE 2
 
@@ -42,7 +42,6 @@ int main(){
     std::thread renderCursorThread(renderCursorThreadFunc, std::ref(window), std::ref(renderer), std::ref(event), WINDOW_SCALE);
     std::thread inputHandlerThread(inputThreadFunc, std::ref(window), std::ref(renderer), std::ref(event), WINDOW_SCALE);
     std::thread eventThread(eventThreadFunc, std::ref(window), std::ref(renderer), std::ref(event), WINDOW_SCALE);
-    //renderThreadFunc(window, renderer, event, WINDOW_SCALE);
     std::cout << "Made Threads\n";
     
     renderThread.join();

@@ -13,23 +13,23 @@ CPP_FILES =	$(shell find ./link -name '*.cpp') $(shell find ./link -name '*.c')
 
 
 test: clean build
-	-./build/com32 > test.log 2>&1
+	-./bin/com32 > test.log 2>&1
 
 build: clean
-	${COMPILER} ${CPP_OPTIONS} ${INCLUDES} ${LINKS} ${CPP_FILES} ./src/main.cpp -o ./build/com32
-	cp -r ./assets ./build/assets
-	chmod +x ./build/com32
+	${COMPILER} ${CPP_OPTIONS} ${INCLUDES} ${LINKS} ${CPP_FILES} ./src/main.cpp -o ./bin/com32
+	cp -r ./assets ./bin/assets
+	chmod +x ./bin/com32
 
 heady: 
-	rm -f ./build/singleFile.cpp
-	heady --source "src" --output "build/singleFile.cpp"
+	rm -f ./bin/singleFile.cpp
+	heady --source "src" --output "bin/singleFile.cpp"
 
-git: clean build
+git: clean bin
 	git add *
 	git commit
 	git pull
 	git push
 
 clean:
-	-rm -rf build
-	mkdir build
+	-rm -rf bin
+	mkdir bin
