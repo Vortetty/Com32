@@ -26,6 +26,7 @@ heady:
 
 git: clean build
 	git add *
+	git add .gitignore
 	git commit
 	git pull
 	git push
