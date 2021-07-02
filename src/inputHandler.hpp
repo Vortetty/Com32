@@ -7,6 +7,4 @@
 #include <unistd.h>
 
 void inputThreadFunc(cen::window &window, cen::renderer &renderer, cen::event &event, int windowScale){
-    while (!windowKilled){
-    }
 }

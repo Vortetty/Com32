@@ -21,6 +21,7 @@ std::threadsafe::safe_vector<std::threadsafe::safe_vector<character>> charBuf;
 std::threadsafe::safe_deque<modifiedChar> charChanges;
 std::threadsafe::safe_vector<bool> fontBitmap;
 bool windowKilled=false;
+bool windowNeedsKilled=false;
 Vec2 cursorPosition={0, 3};
 
 unsigned fontBitmapWidth, fontBitmapHeight;

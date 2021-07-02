@@ -1,5 +1,7 @@
 #include <centurion.hpp>
 #include "threadsafe/vector"
+#include "externs.hpp"
+#include "shared.hpp"
 
 #ifndef WINDOW_MANAGER
 #define WINDOW_MANAGER
@@ -11,14 +13,7 @@ std::pair<cen::window, cen::renderer> initWindow(cen::library &centurion, bool s
     return wr;
 }
 
-volatile bool shouldKillWindow(cen::event &event){
-    bool tmp = false;
-    while (event.poll()){
-        tmp = event.is<cen::quit_event>();
-        if (tmp) return true;
-    }
-    return false;
-}
+inline bool shouldKillWindow() { return windowNeedsKilled; };
 
 std::threadsafe::safe_vector<cen::event_type> getEvents(cen::event &event){
     std::threadsafe::safe_vector<cen::event_type> events;

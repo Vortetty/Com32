@@ -58,7 +58,7 @@ void pushFrame(cen::window &window, cen::renderer &renderer){
 Vec2 windowSize = {ScreenSize.x + ScreenPadding.top + ScreenPadding.bottom, ScreenSize.y + ScreenPadding.left + ScreenPadding.right};
 
 void renderThreadFunc(cen::window &window, cen::renderer &renderer, cen::event &event, int windowScale){
-    while (!shouldKillWindow(event)){
+    while (!shouldKillWindow()){
         auto toPopStart = charChanges.begin();
         auto toPopEnd = charChanges.end();
         for (auto &editedChar : charChanges){
@@ -71,7 +71,7 @@ void renderThreadFunc(cen::window &window, cen::renderer &renderer, cen::event &
             pushFrame(window, renderer);
             //sleepms(1000);
 
-            if (shouldKillWindow(event)){
+            if (shouldKillWindow()){
                 killWindow(window);
                 windowKilled = true;
                 return;
