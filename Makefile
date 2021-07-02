@@ -24,7 +24,7 @@ heady:
 	rm -f ./bin/singleFile.cpp
 	heady --source "src" --output "bin/singleFile.cpp"
 
-git: clean bin
+git: clean build
 	git add *
 	git commit
 	git pull
